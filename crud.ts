@@ -29,8 +29,25 @@ async function run(){
     // console.log("Profile created:", createProfile);
 
     // retrive all users
-    const users = await prisma.user.findMany();
-    console.log("All users:", users);
+    // const users = await prisma.user.findMany();
+    // console.log("All users:", users);
+
+    // const updateUser = await prisma.profile.update({
+    //     where:{
+    //         userId:1
+    //     },
+    //     data:{
+    //         bio:"Updated bio information"
+    //     }
+    // })
+    // console.log("Updated profile:", updateUser);
+
+    const deleteUser = await prisma.user.delete({
+        where:{
+            id:2
+        }
+    })
+    console.log("Deleted user:", deleteUser);
 }
 
 run()
