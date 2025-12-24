@@ -20,13 +20,17 @@ async function run(){
     // })
     // console.log("Post created:", createPost);
 
-    const createProfile = await prisma.profile.create({
-        data:{
-            bio:"This is my bio",
-            userId:1
-        }
-    })
-    console.log("Profile created:", createProfile);
+    // const createProfile = await prisma.profile.create({
+    //     data:{
+    //         bio:"This is my bio",
+    //         userId:1
+    //     }
+    // })
+    // console.log("Profile created:", createProfile);
+
+    // retrive all users
+    const users = await prisma.user.findMany();
+    console.log("All users:", users);
 }
 
 run()
