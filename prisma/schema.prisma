@@ -25,20 +25,36 @@ datasource db {
 // }
 
 model User {
-  id Int @id @default(autoincrement())
-  name String
-  email String @unique
-  posts Post[]
+  id      Int      @id @default(autoincrement())
+  name    String
+  email   String   @unique
+  posts   Post[]
+  profile Profile?
+
+  role Role @default(USER)
 }
 
-model Post{
-  id Int @id @default(autoincrement())
-  title String
-  content String
-  isPublished Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Profile {
+  id          Int       @id @default(autoincrement())
+  bio         String?
+  dateOfBirth DateTime?
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+}
+model Post {
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   authorId Int
-  author User @relation(fields: [authorId], references: [id])
+  author   User @relation(fields: [authorId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
 }
